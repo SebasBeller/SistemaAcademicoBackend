@@ -8,18 +8,24 @@ export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
   @Post()
-  create(@Body() createProfesorDto: CreateProfesorDto) {
-    return this.profesorService.create(createProfesorDto);
+  async create(@Body() createProfesorDto: CreateProfesorDto) {
+    return await this.profesorService.create(createProfesorDto);
   }
 
   @Get()
-  findAll() {
-    return this.profesorService.findAll();
+  async findAll() {
+    return await this.profesorService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.profesorService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.profesorService.findOne(+id);
+  }
+
+  
+  @Get('/find_by_name/:name')
+  async findOneByName(@Param('name') name: string) {
+    return await this.profesorService.findOneByName(name);
   }
 
   @Patch(':id')

@@ -25,7 +25,14 @@ export class MateriasService {
 
   findOne(id: number) {
     return this.materiaRepository.findOne({
-      where: {id_materia:id},relations:['paralelo']
+      where: {id_materia:id}
+    });
+  }
+  findOneByName(name:string) {
+    return this.materiaRepository.findOne({
+      where: {
+        nombre:name
+      }
     });
   }
 

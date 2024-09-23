@@ -10,7 +10,8 @@ export class UnidadService {
 
   }
   create(createUnidadDto: CreateUnidadDto) {
-    return 'This action adds a new unidad';
+    const newUnidad = this.unidadRepository.create(createUnidadDto);
+    return this.unidadRepository.save(newUnidad);
   }
 
   findAll() {
@@ -22,9 +23,15 @@ export class UnidadService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} unidad`;
+    return this.unidadRepository.findOne({
+      where: {id_unidad:id}
+    })
   }
-
+  findOneByName(name:string) {
+    return this.unidadRepository.findOne({
+      where: {nombre:name}
+    })
+  }
   update(id: number, updateUnidadDto: UpdateUnidadDto) {
     return `This action updates a #${id} unidad`;
   }

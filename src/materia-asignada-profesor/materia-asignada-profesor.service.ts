@@ -10,7 +10,8 @@ export class MateriaAsignadaProfesorService {
 
   }
   create(createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
-    // return 'This action adds a new materiaAsignadaProfesor';
+    const nuevaMateriaAsignada=this.materiaAsignadaProfesorRepository.create(createMateriaAsignadaProfesorDto);
+    return this.materiaAsignadaProfesorRepository.save(nuevaMateriaAsignada);
   }
 
   findAll() {
@@ -19,11 +20,10 @@ export class MateriaAsignadaProfesorService {
         relations: ['materia','profesor','unidades']
       }
     );
-    // return `This action returns all materiaAsignadaProfesor`;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} materiaAsignadaProfesor`;
+    return this.materiaAsignadaProfesorRepository.findOne({where:{ id_dicta:id}  });
   }
 
   update(id: number, updateMateriaAsignadaProfesorDto: UpdateMateriaAsignadaProfesorDto) {

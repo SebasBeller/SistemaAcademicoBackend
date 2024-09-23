@@ -10,7 +10,8 @@ export class MaterialService {
 
   }
   create(createMaterialDto: CreateMaterialDto) {
-    return 'This action adds a new material';
+    const material = this.materialRepository.create(createMaterialDto);
+    return this.materialRepository.save(material);
   }
 
   findAll() {
@@ -20,7 +21,14 @@ export class MaterialService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} material`;
+    return this.materialRepository.findOne({
+      where: { id_material: id }
+    })
+  }
+  findOneByName(name: string) {
+    return this.materialRepository.findOne({
+      where: {nombre: name}  }
+    );
   }
 
   update(id: number, updateMaterialDto: UpdateMaterialDto) {

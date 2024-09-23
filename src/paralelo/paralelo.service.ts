@@ -11,7 +11,8 @@ export class ParaleloService {
   private readonly materiaRepository: Repository<Paralelo>) {}
 
   create(createParaleloDto: CreateParaleloDto) {
-    return this.materiaRepository.save(createParaleloDto);
+    const nuevaMateria = this.materiaRepository.create(createParaleloDto);
+    return this.materiaRepository.save(nuevaMateria);
   }
 
   findAll() {

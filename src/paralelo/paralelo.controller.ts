@@ -8,8 +8,8 @@ export class ParaleloController {
   constructor(private readonly paraleloService: ParaleloService) {}
 
   @Post()
-  create(@Body() createParaleloDto: CreateParaleloDto) {
-    return this.paraleloService.create(createParaleloDto);
+  async create(@Body() createParaleloDto: CreateParaleloDto) {
+    return await this.paraleloService.create(createParaleloDto);
   }
 
   @Get()
@@ -18,8 +18,8 @@ export class ParaleloController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paraleloService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.paraleloService.findOne(+id);
   }
 
   @Patch(':id')

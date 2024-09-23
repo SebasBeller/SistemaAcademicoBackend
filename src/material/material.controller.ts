@@ -8,18 +8,23 @@ export class MaterialController {
   constructor(private readonly materialService: MaterialService) {}
 
   @Post()
-  create(@Body() createMaterialDto: CreateMaterialDto) {
-    return this.materialService.create(createMaterialDto);
+  async create(@Body() createMaterialDto: CreateMaterialDto) {
+    return await this.materialService.create(createMaterialDto);
   }
 
   @Get()
-  findAll() {
-    return this.materialService.findAll();
+  async findAll() {
+    return await this.materialService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.materialService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.materialService.findOne(+id);
+  }
+
+  @Get('/find_by_name/:name')
+  async findOneByName(@Param('name') name: string) {
+    return await this.materialService.findOneByName(name);
   }
 
   @Patch(':id')

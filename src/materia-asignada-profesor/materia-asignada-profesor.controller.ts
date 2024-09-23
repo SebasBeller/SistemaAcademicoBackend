@@ -10,18 +10,18 @@ export class MateriaAsignadaProfesorController {
   ) {}
 
   @Post()
-  create(@Body() createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
-    return this.materiaAsignadaProfesorService.create(createMateriaAsignadaProfesorDto);
+  async create(@Body() createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
+    return await this.materiaAsignadaProfesorService.create(createMateriaAsignadaProfesorDto);
   }
 
   @Get()
-  findAll() {
-    return this.materiaAsignadaProfesorService.findAll();
+  async findAll() {
+    return await this.materiaAsignadaProfesorService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.materiaAsignadaProfesorService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.materiaAsignadaProfesorService.findOne(+id);
   }
 
   @Patch(':id')

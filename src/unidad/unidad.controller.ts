@@ -22,6 +22,11 @@ export class UnidadController {
     return this.unidadService.findOne(+id);
   }
 
+  @Get(':name')
+  findOneByName(@Param('name') name: string) {
+    return this.unidadService.findOneByName(name);
+  }
+  
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUnidadDto: UpdateUnidadDto) {
     return this.unidadService.update(+id, updateUnidadDto);

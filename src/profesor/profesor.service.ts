@@ -10,17 +10,19 @@ export class ProfesorService {
 
   }
   create(createProfesorDto: CreateProfesorDto) {
-    return 'This action adds a new profesor';
+    const profesor = this.profesorRepository.create(createProfesorDto);
+    return this.profesorRepository.save(profesor);
   }
 
   findAll() {
     return this.profesorRepository.find();
-    // return `This action returns all profesor`;
   }
 
   findOne(id: number) {
     return this.profesorRepository.findOne({ where: { id_profesor: id } });
-    // return `This action returns a #${id} profesor`;
+  }
+  findOneByName(name:string) {
+    return this.profesorRepository.findOne({ where: { nombre:name } });
   }
 
   update(id: number, updateProfesorDto: UpdateProfesorDto) {

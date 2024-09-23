@@ -8,8 +8,8 @@ export class MateriasController {
   constructor(private readonly materiasService: MateriasService) {}
 
   @Post()
-  create(@Body() createMateriaDto: CreateMateriaDto) {
-    return this.materiasService.create(createMateriaDto);
+  async create(@Body() createMateriaDto: CreateMateriaDto) {
+    return await this.materiasService.create(createMateriaDto);
   }
 
   @Get()
@@ -18,8 +18,12 @@ export class MateriasController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.materiasService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.materiasService.findOne(+id);
+  }
+  @Get('/find_by_name/:name')
+  async findOneByName(@Param('name') name: string) {
+    return await this.materiasService.findOneByName(name);
   }
 
   @Patch(':id')
