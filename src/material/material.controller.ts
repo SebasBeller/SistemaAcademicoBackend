@@ -17,6 +17,11 @@ export class MaterialController {
     return await this.materialService.findAll();
   }
 
+  @Get('/unidad/:id')
+  async findAllMaterialesDeUnidad(@Param('id') id: string) {
+    return await this.materialService.findAllMaterialesDeunidad(+id);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.materialService.findOne(+id);

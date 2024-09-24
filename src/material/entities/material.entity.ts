@@ -14,6 +14,9 @@ export class Material {
     
     @Column()
     tipo:string
+
+    @Column({nullable:true})
+    id_unidad:number
     
     @ManyToOne(()=>Unidad,(unidad)=>unidad.materiales)
     @JoinColumn({ name: 'id_unidad' })

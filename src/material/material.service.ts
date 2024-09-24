@@ -19,10 +19,15 @@ export class MaterialService {
       relations: ['unidad']
     });
   }
+  findAllMaterialesDeunidad(id:number) {
+    return this.materialRepository.find({
+      where: {unidad: {id_unidad: id}}
+    });
+  }
 
   findOne(id: number) {
     return this.materialRepository.findOne({
-      where: { id_material: id }
+      where: { id_material: id },
     })
   }
   findOneByName(name: string) {
