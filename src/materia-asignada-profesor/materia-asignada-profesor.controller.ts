@@ -19,9 +19,17 @@ export class MateriaAsignadaProfesorController {
     return await this.materiaAsignadaProfesorService.findAll();
   }
 
+  @Get('todas-las-materias')
+  async findAllSignatures() {
+    return await this.materiaAsignadaProfesorService.findAllSignaturesMateriaAsignada();
+  }
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.materiaAsignadaProfesorService.findOne(+id);
+  }
+  @Get('materias/:nombre')
+  async findTecherSignatures(@Param('nombre') nombre: string) {
+    return await this.materiaAsignadaProfesorService.findAllTeacherSignatures(nombre);
   }
 
   @Patch(':id')

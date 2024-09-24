@@ -21,9 +21,27 @@ export class MateriaAsignadaProfesorService {
       }
     );
   }
+  async findAllSignaturesMateriaAsignada() {
+    return this.materiaAsignadaProfesorRepository.find(
+      {
+        relations: ['materia','materia.paralelo']
+      }
+    );
+  }
+  async findAllTeacherSignatures(nombre: string) {
+    console.log("ENTE")
+    return await this.materiaAsignadaProfesorRepository.find({
+        relations: ['materia', 'materia.paralelo', 'profesor'],
+        where: { profesor: { nombre: nombre } }
+    });
+}
+
 
   findOne(id: number) {
-    return this.materiaAsignadaProfesorRepository.findOne({where:{ id_dicta:id}  });
+    return this.materiaAsignadaProfesorRepository.findOne({
+      where: { id_dicta: id },
+      relations: ['materia', 'materia.paralelo','profesor'],
+    });
   }
 
   update(id: number, updateMateriaAsignadaProfesorDto: UpdateMateriaAsignadaProfesorDto) {

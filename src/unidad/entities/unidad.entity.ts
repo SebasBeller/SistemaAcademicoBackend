@@ -15,6 +15,9 @@ export class Unidad {
   @Column()
   imagen_url: string;
 
+  @Column({nullable:true})
+  id_dicta?: number
+
   @ManyToOne(() => MateriaAsignadaProfesor, (materia) => materia.unidades)
   @JoinColumn({ name: 'id_dicta' })
   materiaAsignada: MateriaAsignadaProfesor

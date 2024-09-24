@@ -16,6 +16,10 @@ export class UnidadController {
   findAll() {
     return this.unidadService.findAll();
   }
+  @Get("materia-asignada/:id")
+  findAllUnidadesDeMateriaAsignada(@Param('id') id: string) {
+    return this.unidadService.findAllUnidadesDeMateriaAsignada(+id);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
