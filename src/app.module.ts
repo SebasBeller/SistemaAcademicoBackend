@@ -8,6 +8,9 @@ import { ProfesorModule } from './profesor/profesor.module';
 import { MateriaAsignadaProfesorModule } from './materia-asignada-profesor/materia-asignada-profesor.module';
 import { UnidadModule } from './unidad/unidad.module';
 import { MaterialModule } from './material/material.module';
+import { EstudianteModule } from './estudiante/estudiante.module';
+import { AsistenciaModule } from './asistencia/asistencia.module';
+import { InscripcionModule } from './inscripcion/inscripcion.module';
 @Module({
   imports: [MateriasModule
     ,TypeOrmModule.forRoot({
@@ -19,7 +22,7 @@ import { MaterialModule } from './material/material.module';
       database: 'boyibbdmvtozlivut10o',
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }), ParaleloModule, ProfesorModule, MateriaAsignadaProfesorModule, UnidadModule, MaterialModule
+    }), ParaleloModule, ProfesorModule, MateriaAsignadaProfesorModule, UnidadModule, MaterialModule,  EstudianteModule, AsistenciaModule, InscripcionModule
   ],
   controllers: [AppController],
   providers: [AppService],
