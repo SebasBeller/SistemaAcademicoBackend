@@ -37,11 +37,11 @@ export class AsistenciaService {
   }
 
   update(id: number, updateAsistenciaDto: UpdateAsistenciaDto) {
-    return `This action updates a #${id} asistencia`;
+    return this.asistenciaRepository.update(id, updateAsistenciaDto);
   }
 
+
   remove(id: number) {
-    // return this.asistenciaRepository.remove(id)
     return `This action removes a #${id} asistencia`;
   }
 }
