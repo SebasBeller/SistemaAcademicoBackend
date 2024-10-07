@@ -25,7 +25,21 @@ export class MateriaAsignadaProfesorController {
   }
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.materiaAsignadaProfesorService.findOne(+id);
+    return await this.materiaAsignadaProfesorService.findOne(
+      +id,
+    );
+  }
+  @Get('asistencias/:id')
+  async findOneWithAsistence(@Param('id') id: string) {
+    return await this.materiaAsignadaProfesorService.findOneWithAllAsitence(
+      +id,
+    );
+  }
+  @Get('inscripciones/:id')
+  async findOneWithInscription(@Param('id') id: string) {
+    return await this.materiaAsignadaProfesorService.findOneWithAllInscriptions(
+      +id,
+    );
   }
   @Get('materias/:nombre')
   async findTecherSignatures(@Param('nombre') nombre: string) {

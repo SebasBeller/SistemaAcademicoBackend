@@ -21,7 +21,7 @@ import { InscripcionModule } from './inscripcion/inscripcion.module';
       password: 'WPCVsvFm8wSYPrn98Szd',
       database: 'boyibbdmvtozlivut10o',
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }), ParaleloModule, ProfesorModule, MateriaAsignadaProfesorModule, UnidadModule, MaterialModule,  EstudianteModule, AsistenciaModule, InscripcionModule
   ],
   controllers: [AppController],

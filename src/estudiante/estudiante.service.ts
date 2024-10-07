@@ -15,7 +15,7 @@ export class EstudianteService {
 
   findAll() {
     return this.usuarioRepository.find({
-      relations: ['paralelo']
+      relations: ['paralelo','asistencias','asistencias.materiaAsignada']
     });
   }
 

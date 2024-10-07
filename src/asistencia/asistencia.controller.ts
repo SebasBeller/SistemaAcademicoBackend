@@ -12,6 +12,11 @@ export class AsistenciaController {
     return this.asistenciaService.create(createAsistenciaDto);
   }
 
+  @Post("/all")
+  createAsistences(@Body() createAsistenciaDto: CreateAsistenciaDto[]) {
+    return this.asistenciaService.createAsistences(createAsistenciaDto);
+  }
+
   @Get()
   findAll() {
     return this.asistenciaService.findAll();

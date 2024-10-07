@@ -40,7 +40,20 @@ export class MateriaAsignadaProfesorService {
   findOne(id: number) {
     return this.materiaAsignadaProfesorRepository.findOne({
       where: { id_dicta: id },
-      relations: ['materia', 'materia.paralelo','profesor'],
+      relations: ['materia', 'materia.paralelo','profesor','asistencias','asistencias.estudiante'],
+    });
+  }
+  findOneWithAllAsitence(id: number) {
+    return this.materiaAsignadaProfesorRepository.findOne({
+      where: { id_dicta: id },
+      relations: ['asistencias','asistencias.estudiante','inscripciones','inscripciones.estudiante'],
+    });
+  }
+  
+  findOneWithAllInscriptions(id: number) {
+    return this.materiaAsignadaProfesorRepository.findOne({
+      where: { id_dicta: id },
+      relations: ['inscripciones','inscripciones.estudiante'],
     });
   }
 
