@@ -53,9 +53,23 @@ export class MateriaAsignadaProfesorService {
   findOneWithAllInscriptions(id: number) {
     return this.materiaAsignadaProfesorRepository.findOne({
       where: { id_dicta: id },
-      relations: ['inscripciones','inscripciones.estudiante'],
+      relations: ['inscripciones.estudiante'],
     });
   }
+  async findOneWithAllStudents(id: number) {
+    const materiaAsignada = await this.materiaAsignadaProfesorRepository.findOne({
+      where: { id_dicta: id },
+      relations: ['inscripciones.estudiante'],
+    });
+  
+    // Asegúrate de que existan inscripciones antes de intentar extraer estudiantes
+    if (materiaAsignada && materiaAsignada.inscripciones) {
+      return materiaAsignada.inscripciones.map(inscripcion => inscripcion.estudiante);
+    }
+  
+    return [];
+  }
+
 
   update(id: number, updateMateriaAsignadaProfesorDto: UpdateMateriaAsignadaProfesorDto) {
     return `This action updates a #${id} materiaAsignadaProfesor`;

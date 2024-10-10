@@ -41,6 +41,12 @@ export class MateriaAsignadaProfesorController {
       +id,
     );
   }
+  @Get('estudiantes/:id')
+  async findOneWithStudents(@Param('id') id: string) {
+    return await this.materiaAsignadaProfesorService.findOneWithAllStudents(
+      +id,
+    );
+  }
   @Get('materias/:nombre')
   async findTecherSignatures(@Param('nombre') nombre: string) {
     return await this.materiaAsignadaProfesorService.findAllTeacherSignatures(nombre);
