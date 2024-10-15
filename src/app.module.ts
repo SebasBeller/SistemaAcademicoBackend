@@ -11,6 +11,7 @@ import { MaterialModule } from './material/material.module';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { AsistenciaModule } from './asistencia/asistencia.module';
 import { InscripcionModule } from './inscripcion/inscripcion.module';
+import { NotaModule } from './nota/nota.module';
 @Module({
   imports: [MateriasModule
     ,TypeOrmModule.forRoot({
@@ -22,7 +23,7 @@ import { InscripcionModule } from './inscripcion/inscripcion.module';
       database: 'boyibbdmvtozlivut10o',
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
       synchronize: false,
-    }), ParaleloModule, ProfesorModule, MateriaAsignadaProfesorModule, UnidadModule, MaterialModule,  EstudianteModule, AsistenciaModule, InscripcionModule
+    }), ParaleloModule, ProfesorModule, MateriaAsignadaProfesorModule, UnidadModule, MaterialModule,  EstudianteModule, AsistenciaModule, InscripcionModule, NotaModule
   ],
   controllers: [AppController],
   providers: [AppService],
