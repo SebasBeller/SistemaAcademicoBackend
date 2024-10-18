@@ -11,6 +11,16 @@ export class Estudiante {
     @Column()
     nombre:string;
 
+    @Column()
+    apellido:string;
+
+    @Column()
+    email:string;
+
+    @Column()
+    password:string;
+
+
     @ManyToOne(()=>Paralelo)
     @JoinColumn({ name: 'id_paralelo' })
     paralelo:Paralelo
