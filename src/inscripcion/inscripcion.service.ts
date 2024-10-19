@@ -15,11 +15,18 @@ export class InscripcionService {
   findAll() {
     return this.inscripcionRepository.find(
       {
-        relations: ['estudiante', 'materiaAsignada.materia']
+        relations: ['estudiante', 'materiaAsignada.materia','materiaAsignada.materia.paralelo']
       }
     );
   }
-
+  async findAllMateriasEstudiante(id:number) {
+    const inscripciones = await this.inscripcionRepository.find({
+      relations: ['materiaAsignada.materia', 'materiaAsignada.materia.paralelo', 'materiaAsignada.profesor'],
+      where: { id_estudiante: id },
+    });
+  
+    return inscripciones.map((inscripcion) => inscripcion.materiaAsignada);
+  }
   findOne(id: number) {
     return `This action returns a #${id} inscripcion`;
   }

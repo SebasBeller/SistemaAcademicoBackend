@@ -10,6 +10,9 @@ export class Inscripcion {
   @Column({type:'date'})
   fecha_inscripcion:Date
 
+  @Column()
+  id_estudiante:number;
+
   @ManyToOne(()=>Estudiante,(estudiante)=>estudiante.inscripciones)
   @JoinColumn({ name: 'id_estudiante' })
   estudiante:Estudiante

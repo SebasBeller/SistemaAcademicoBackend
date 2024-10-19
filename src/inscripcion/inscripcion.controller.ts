@@ -17,6 +17,11 @@ export class InscripcionController {
     return this.inscripcionService.findAll();
   }
 
+  @Get('estudiante/:id')
+  findAllMateriasEstudiante(@Param('id') id: string) {
+    return this.inscripcionService.findAllMateriasEstudiante(+id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.inscripcionService.findOne(+id);

@@ -19,6 +19,8 @@ export class EstudianteService {
       relations: ['paralelo','asistencias','asistencias.materiaAsignada']
     });
   }
+
+  
   findOneByEmail(email: string) {
     return this.usuarioRepository.findOne({ where: { email } });
   }
