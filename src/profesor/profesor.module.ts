@@ -9,5 +9,6 @@ import {Profesor} from "./entities/profesor.entity"
   ])],
   controllers: [ProfesorController],
   providers: [ProfesorService],
+  exports:[ProfesorService]
 })
 export class ProfesorModule {}

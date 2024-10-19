@@ -10,7 +10,8 @@ export class EstudianteService {
 
   }
   create(createEstudianteDto: CreateEstudianteDto) {
-    return 'This action adds a new estudiante';
+    console.log(createEstudianteDto)
+    return this.usuarioRepository.save(createEstudianteDto);
   }
 
   findAll() {
@@ -18,7 +19,10 @@ export class EstudianteService {
       relations: ['paralelo','asistencias','asistencias.materiaAsignada']
     });
   }
-
+  findOneByEmail(email: string) {
+    return this.usuarioRepository.findOne({ where: { email } });
+  }
+  
   findOne(id: number) {
     return `This action returns a #${id} estudiante`;
   }

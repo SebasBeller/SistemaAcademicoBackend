@@ -18,6 +18,11 @@ export class ProfesorService {
     return this.profesorRepository.find();
   }
 
+  findOneByEmail(email: string) {
+    return this.profesorRepository.findOne({ where: { email } });
+  }
+  
+
   findOne(id: number) {
     return this.profesorRepository.findOne({ where: { id_profesor: id } });
   }

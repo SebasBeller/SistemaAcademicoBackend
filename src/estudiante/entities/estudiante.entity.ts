@@ -20,6 +20,9 @@ export class Estudiante {
     @Column()
     password:string;
 
+    @Column({type:'number'})
+    id_paralelo:number;
+
 
     @ManyToOne(()=>Paralelo)
     @JoinColumn({ name: 'id_paralelo' })
