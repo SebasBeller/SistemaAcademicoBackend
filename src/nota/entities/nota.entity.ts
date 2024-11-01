@@ -7,6 +7,11 @@ export class Nota {
     @PrimaryGeneratedColumn()
     id:number;
 
+    @Column()
+    id_estudiante:number;
+    @Column()
+    id_dicta:number;
+
     
     @ManyToOne(() => Estudiante)
     @JoinColumn({ name: 'id_estudiante' })
@@ -24,5 +29,7 @@ export class Nota {
     tipo:string;
     @Column()
     nota:number;
+    @Column()
+    anio:number;
 
 }

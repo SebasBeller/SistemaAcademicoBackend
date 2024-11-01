@@ -3,8 +3,9 @@ import { InscripcionService } from './inscripcion.service';
 import { InscripcionController } from './inscripcion.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Inscripcion } from './entities/inscripcion.entity';
+import {NotaModule} from '../nota/nota.module'
 @Module({
-  imports:[TypeOrmModule.forFeature([Inscripcion])],
+  imports:[TypeOrmModule.forFeature([Inscripcion]),NotaModule],
   controllers: [InscripcionController],
   providers: [InscripcionService],
 })

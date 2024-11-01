@@ -2,14 +2,20 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { InscripcionService } from './inscripcion.service';
 import { CreateInscripcionDto } from './dto/create-inscripcion.dto';
 import { UpdateInscripcionDto } from './dto/update-inscripcion.dto';
+import {NotaService} from '../nota/nota.service'
+import { CreateNotaDto } from 'src/nota/dto/create-nota.dto';
 
 @Controller('inscripcion')
 export class InscripcionController {
-  constructor(private readonly inscripcionService: InscripcionService) {}
+  constructor(private readonly inscripcionService: InscripcionService,
+    private readonly notasService:NotaService
+  ) {}
 
   @Post()
   create(@Body() createInscripcionDto: CreateInscripcionDto) {
+    this.notasService.crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto);
     return this.inscripcionService.create(createInscripcionDto);
+
   }
 
   @Get()
@@ -20,6 +26,11 @@ export class InscripcionController {
   @Get('estudiante/:id')
   findAllMateriasEstudiante(@Param('id') id: string) {
     return this.inscripcionService.findAllMateriasEstudiante(+id);
+  }
+
+  @Get('estudiantes/:id')
+  findAllInscritosDeMateria(@Param('id') id: string) {
+    return this.inscripcionService.findEstudiantesInscritos(+id);
   }
 
   @Get(':id')
