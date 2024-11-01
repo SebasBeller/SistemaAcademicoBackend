@@ -10,8 +10,7 @@ export class InscripcionService {
   constructor(@InjectRepository(Inscripcion) private readonly inscripcionRepository: Repository<Inscripcion>,
 ) { }
   create(createInscripcionDto: CreateInscripcionDto) {
-    console.log(createInscripcionDto)
-    return 'This action adds a new inscripcion';
+    return this.inscripcionRepository.save(createInscripcionDto)
   }
 
   findAll() {

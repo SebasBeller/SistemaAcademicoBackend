@@ -7,5 +7,6 @@ import {Asistencia} from "./entities/asistencia.entity";
   imports: [TypeOrmModule.forFeature([Asistencia])],
   controllers: [AsistenciaController],
   providers: [AsistenciaService],
+  exports:[AsistenciaService]
 })
 export class AsistenciaModule {}
