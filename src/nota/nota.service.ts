@@ -43,7 +43,7 @@ export class NotaService {
   }
 
   update(id: number, updateNotaDto: UpdateNotaDto) {
-    return `This action updates a #${id} nota`;
+    return this.notaRepository.update(id,updateNotaDto);
   }
 
   remove(id: number) {
