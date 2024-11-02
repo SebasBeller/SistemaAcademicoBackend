@@ -26,12 +26,23 @@ export class EstudianteService {
   }
   
   findOne(id: number) {
-    return `This action returns a #${id} estudiante`;
+    return this.usuarioRepository.findOne({
+      where: { id_estudiante: id },  
+      relations: ['paralelo', 'asistencias', 'asistencias.materiaAsignada']
+    });
   }
 
-  update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
-    return `This action updates a #${id} estudiante`;
-  }
+ update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
+  return this.usuarioRepository.preload({
+    id_estudiante: id, 
+    ...updateEstudianteDto,
+  }).then((estudiante) => {
+    if (!estudiante) {
+      throw new Error(`Estudiante con ID ${id} no encontrado`);
+    }
+    return this.usuarioRepository.save(estudiante);
+  });
+}
 
   remove(id: number) {
     return `This action removes a #${id} estudiante`;
