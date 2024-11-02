@@ -61,6 +61,6 @@ export class AsistenciaService {
 
 
   remove(id: number) {
-    return `This action removes a #${id} asistencia`;
+    return this.asistenciaRepository.delete(id)
   }
 }
