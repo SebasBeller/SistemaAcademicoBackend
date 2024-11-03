@@ -24,7 +24,7 @@ export class MateriaAsignadaProfesorService {
   async findAllSignaturesMateriaAsignada() {
     return this.materiaAsignadaProfesorRepository.find(
       {
-        relations: ['materia','materia.paralelo']
+        relations: ['materia','materia.paralelo','profesor']
       }
     );
   }

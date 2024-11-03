@@ -24,5 +24,4 @@ export class Nota {
     tipo:string;
     @Column()
     nota:number;
-
 }

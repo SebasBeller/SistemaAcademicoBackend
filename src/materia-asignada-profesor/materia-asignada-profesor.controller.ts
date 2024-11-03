@@ -13,7 +13,6 @@ export class MateriaAsignadaProfesorController {
   async create(@Body() createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
     return await this.materiaAsignadaProfesorService.create(createMateriaAsignadaProfesorDto);
   }
-
   @Get()
   async findAll() {
     return await this.materiaAsignadaProfesorService.findAll();
