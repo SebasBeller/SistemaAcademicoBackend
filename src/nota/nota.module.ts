@@ -7,5 +7,6 @@ import {Nota} from './entities/nota.entity'
   imports:[TypeOrmModule.forFeature([Nota])],
   controllers: [NotaController],
   providers: [NotaService],
+  exports:[NotaService]
 })
 export class NotaModule {}

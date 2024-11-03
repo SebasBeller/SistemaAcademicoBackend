@@ -7,9 +7,10 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class InscripcionService {
 
-  constructor(@InjectRepository(Inscripcion) private readonly inscripcionRepository: Repository<Inscripcion>) { }
+  constructor(@InjectRepository(Inscripcion) private readonly inscripcionRepository: Repository<Inscripcion>,
+) { }
   create(createInscripcionDto: CreateInscripcionDto) {
-    return 'This action adds a new inscripcion';
+    return this.inscripcionRepository.save(createInscripcionDto)
   }
 
   findAll() {
@@ -26,6 +27,14 @@ export class InscripcionService {
     });
   
     return inscripciones.map((inscripcion) => inscripcion.materiaAsignada);
+  }
+
+  async findEstudiantesInscritos(id:number) {
+    const inscripciones = await this.inscripcionRepository.find({
+      relations: ['estudiante'],
+      where: { id_dicta: id },
+    });
+    return inscripciones.map((inscripcion)=>inscripcion.estudiante)
   }
   findOne(id: number) {
     return `This action returns a #${id} inscripcion`;

@@ -4,7 +4,7 @@ import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Asistencia} from "./entities/asistencia.entity";
 import { Repository } from 'typeorm';
-import { format } from 'date-fns';
+import {CreateInscripcionDto} from '../inscripcion/dto/create-inscripcion.dto'
 @Injectable()
 export class AsistenciaService {
   constructor(@InjectRepository(Asistencia) private readonly asistenciaRepository: Repository<Asistencia>){
@@ -22,6 +22,25 @@ export class AsistenciaService {
       asistencia.fecha_asistencia = formattedDate;
     })
     return  this.asistenciaRepository.save(createAsistenciaDto);
+  }
+
+  crearAsistenciaPorDefecto(createInscripcionDto:CreateInscripcionDto){
+    this.findAll().then((response)=>{
+      let fechasAsistencias:any=response.filter((asistencia)=>(
+        new Date(asistencia.fecha_asistencia).getFullYear()==createInscripcionDto.anio && 
+      asistencia.id_dicta==createInscripcionDto.id_dicta )
+      ).map((result)=>result.fecha_asistencia);
+      fechasAsistencias=new Set(fechasAsistencias);
+      fechasAsistencias.forEach((fecha)=>{
+        this.create({
+          id_dicta:createInscripcionDto.id_dicta,
+          estado:"Justificado",
+          fecha_asistencia:fecha,
+          id_estudiante:createInscripcionDto.id_estudiante
+        });
+      })
+    });
+
   }
 
 
@@ -42,6 +61,6 @@ export class AsistenciaService {
 
 
   remove(id: number) {
-    return `This action removes a #${id} asistencia`;
+    return this.asistenciaRepository.delete(id)
   }
 }
