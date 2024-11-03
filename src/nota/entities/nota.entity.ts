@@ -29,10 +29,7 @@ export class Nota {
     tipo:string;
     @Column()
     nota:number;
-<<<<<<< HEAD
-=======
     @Column()
     anio:number;
 
->>>>>>> 960bc5b4a364d8672b0bffbbeb05e68a4c40e73e
 }
