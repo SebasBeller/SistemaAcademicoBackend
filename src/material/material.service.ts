@@ -4,6 +4,8 @@ import { UpdateMaterialDto } from './dto/update-material.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Material } from './entities/material.entity';
 import { Repository } from 'typeorm';
+import { NotFoundException } from '@nestjs/common';
+
 @Injectable()
 export class MaterialService {
   constructor(@InjectRepository(Material) private readonly materialRepository: Repository<Material>) {
@@ -36,11 +38,17 @@ export class MaterialService {
     );
   }
 
-  update(id: number, updateMaterialDto: UpdateMaterialDto) {
-    return `This action updates a #${id} material`;
+  async update(id: number, updateMaterialDto: UpdateMaterialDto) {
+    await this.findOne(id); // Verifica si el material existe
+    await this.materialRepository.update(id, updateMaterialDto);
+    return this.materialRepository.findOne({ where: { id_material: id } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} material`;
+  async remove(id: number) {
+    const result = await this.materialRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Material with id ${id} not found`);
+    }
+    return { message: `Material with id ${id} removed successfully` };
   }
 }
