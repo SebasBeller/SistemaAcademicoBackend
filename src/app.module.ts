@@ -17,10 +17,10 @@ import {AuthModule} from './auth/auth.module'
   imports: [MateriasModule
     ,TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'boyibbdmvtozlivut10o-mysql.services.clever-cloud.com',
+      host: 'localhost',
       port: 3306,
-      username: 'uxtwiytdyfsbrush',
-      password: 'WPCVsvFm8wSYPrn98Szd',
+      username: 'root',
+      password: '5951561010',
       database: 'boyibbdmvtozlivut10o',
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
       synchronize: false,

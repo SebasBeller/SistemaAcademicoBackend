@@ -19,6 +19,9 @@ export class Estudiante {
 
     @Column()
     password:string;
+    
+    @Column()
+    foto:string;
 
     @Column({type:'number'})
     id_paralelo:number;
