@@ -11,9 +11,6 @@ export class UnidadService {
     private readonly unidadRepository: Repository<Unidad>,
   ) {}
   create(createUnidadDto: CreateUnidadDto) {
-    // console.log(createUnidadDto);
-    // const newUnidad = this.unidadRepository.create(createUnidadDto);
-    // console.log(newUnidad);
     return this.unidadRepository.save(createUnidadDto);
   }
 
@@ -39,10 +36,10 @@ export class UnidadService {
     });
   }
   update(id: number, updateUnidadDto: UpdateUnidadDto) {
-    return `This action updates a #${id} unidad`;
+    return this.unidadRepository.update(id,updateUnidadDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} unidad`;
+    return this.unidadRepository.delete(id);
   }
 }
