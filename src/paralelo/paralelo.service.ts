@@ -8,21 +8,21 @@ import { Paralelo } from './entities/paralelo.entity';
 @Injectable()
 export class ParaleloService {
   constructor(@InjectRepository(Paralelo) 
-  private readonly materiaRepository: Repository<Paralelo>) {}
+  private readonly paraleloRepository: Repository<Paralelo>) {}
 
   create(createParaleloDto: CreateParaleloDto) {
-    const nuevaMateria = this.materiaRepository.create(createParaleloDto);
-    return this.materiaRepository.save(nuevaMateria);
+    const nuevaMateria = this.paraleloRepository.create(createParaleloDto);
+    return this.paraleloRepository.save(nuevaMateria);
   }
 
   findAll() {
-    return this.materiaRepository.find();
+    return this.paraleloRepository.find();
     // return 
     // return `This action returns all paralelo`;
   }
 
   findOne(id: number) {
-    return this.materiaRepository.findOne({
+    return this.paraleloRepository.findOne({
       where: {id_paralelo:id}
     })
     // return `This action returns a #${id} paralelo`;

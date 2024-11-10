@@ -9,7 +9,7 @@ export class MateriaAsignadaProfesor {
     @PrimaryGeneratedColumn()
     id_dicta: number;
 
-    @Column({type:'date'})
+    @Column({type:'date',nullable:false})
     fecha: Date;
     
     @ManyToOne(() => Materia,(materia)=>materia.materiasAsignadas)
