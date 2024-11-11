@@ -10,6 +10,7 @@ export class MateriaAsignadaProfesorService {
 
   }
   create(createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
+    createMateriaAsignadaProfesorDto.anio=new Date(createMateriaAsignadaProfesorDto.fecha).getFullYear();
     const nuevaMateriaAsignada=this.materiaAsignadaProfesorRepository.create(createMateriaAsignadaProfesorDto);
     return this.materiaAsignadaProfesorRepository.save(nuevaMateriaAsignada);
   }

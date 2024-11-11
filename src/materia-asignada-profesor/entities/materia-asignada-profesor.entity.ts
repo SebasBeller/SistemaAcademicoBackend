@@ -11,6 +11,9 @@ export class MateriaAsignadaProfesor {
 
     @Column({type:'date',nullable:false})
     fecha: Date;
+
+    @Column()
+    anio:number;
     
     @ManyToOne(() => Materia,(materia)=>materia.materiasAsignadas)
     @JoinColumn({ name: 'id_materia' })

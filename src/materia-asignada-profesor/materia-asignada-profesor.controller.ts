@@ -11,6 +11,7 @@ export class MateriaAsignadaProfesorController {
 
   @Post()
   async create(@Body() createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
+    
     return await this.materiaAsignadaProfesorService.create(createMateriaAsignadaProfesorDto);
   }
   @Get()
