@@ -11,7 +11,7 @@ export class AuthController {
     private readonly estudianteService: EstudianteService,
     private readonly profesorService: ProfesorService
   ) {}
-
+  
   @Post('register/estudiante')
   async registerEstudiante(@Body() createEstudianteDto) {
     const salt = await bcrypt.genSalt();
