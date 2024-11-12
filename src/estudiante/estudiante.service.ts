@@ -33,15 +33,7 @@ export class EstudianteService {
   }
 
  update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
-  return this.usuarioRepository.preload({
-    id_estudiante: id, 
-    ...updateEstudianteDto,
-  }).then((estudiante) => {
-    if (!estudiante) {
-      throw new Error(`Estudiante con ID ${id} no encontrado`);
-    }
-    return this.usuarioRepository.save(estudiante);
-  });
+  return this.usuarioRepository.update(id,updateEstudianteDto);
 }
 
   remove(id: number) {
