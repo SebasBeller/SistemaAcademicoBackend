@@ -30,8 +30,10 @@ export class ProfesorService {
     return this.profesorRepository.findOne({ where: { nombre:name } });
   }
 
-  update(id: number, updateProfesorDto: UpdateProfesorDto) {
-    return `This action updates a #${id} profesor`;
+  async update(id: number, updateProfesorDto: UpdateProfesorDto) {
+    await this.profesorRepository.update(id, updateProfesorDto);
+    const updatedProfesor = await this.profesorRepository.findOne({ where: { id_profesor: id } });
+    return updatedProfesor;
   }
 
   remove(id: number) {
