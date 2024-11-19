@@ -23,24 +23,33 @@ export class AsistenciaService {
     })
     return  this.asistenciaRepository.save(createAsistenciaDto);
   }
-
-  crearAsistenciaPorDefecto(createInscripcionDto:CreateInscripcionDto){
-    this.findAll().then((response)=>{
+  async createAsistenciasPorDefecto(createInscripcionDto: CreateInscripcionDto[]) {
+    let data = [];
+    for (const inscripcion of createInscripcionDto) {
+      await this.crearAsistenciaPorDefecto(inscripcion, data);
+    }
+    this.asistenciaRepository.save(data)
+  }
+  
+  async crearAsistenciaPorDefecto(createInscripcionDto:CreateInscripcionDto,data:any[]){
+    await this.findAll().then((response)=>{
       let fechasAsistencias:any=response.filter((asistencia)=>(
         new Date(asistencia.fecha_asistencia).getFullYear()==createInscripcionDto.anio && 
-      asistencia.id_dicta==createInscripcionDto.id_dicta )
+      asistencia.id_dicta==createInscripcionDto.id_dicta 
+
+    )
       ).map((result)=>result.fecha_asistencia);
       fechasAsistencias=new Set(fechasAsistencias);
       fechasAsistencias.forEach((fecha)=>{
-        this.create({
+        let asistencia={
           id_dicta:createInscripcionDto.id_dicta,
           estado:"Justificado",
           fecha_asistencia:fecha,
           id_estudiante:createInscripcionDto.id_estudiante
-        });
+        }
+        data.push(asistencia)
       })
     });
-
   }
 
 

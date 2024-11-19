@@ -17,10 +17,11 @@ export class InscripcionController {
   ) {}
 
   @Post()
-  create(@Body() createInscripcionDto: CreateInscripcionDto) {
+  create(@Body() createInscripcionDto: CreateInscripcionDto[]) {
+    console.log(createInscripcionDto)
     this.notasService.crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto);
-    this.asistenciaService.crearAsistenciaPorDefecto(createInscripcionDto);
-    return this.inscripcionService.create(createInscripcionDto);
+    this.asistenciaService.createAsistenciasPorDefecto(createInscripcionDto);
+    return this.inscripcionService.createAll(createInscripcionDto);
 
   }
 

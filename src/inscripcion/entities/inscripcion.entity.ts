@@ -16,6 +16,9 @@ export class Inscripcion {
   @Column()
   id_dicta:number;
 
+  @Column()
+  anio:number;
+
   @ManyToOne(()=>Estudiante,(estudiante)=>estudiante.inscripciones)
   @JoinColumn({ name: 'id_estudiante' })
   estudiante:Estudiante

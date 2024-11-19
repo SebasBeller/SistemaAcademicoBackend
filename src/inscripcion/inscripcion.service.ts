@@ -9,6 +9,9 @@ export class InscripcionService {
 
   constructor(@InjectRepository(Inscripcion) private readonly inscripcionRepository: Repository<Inscripcion>,
 ) { }
+createAll(createInscripcionDto: CreateInscripcionDto[]) {
+  return this.inscripcionRepository.save(createInscripcionDto)
+}
   create(createInscripcionDto: CreateInscripcionDto) {
     return this.inscripcionRepository.save(createInscripcionDto)
   }

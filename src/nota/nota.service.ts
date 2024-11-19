@@ -21,21 +21,28 @@ export class NotaService {
     })
   }
 
-  crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto:CreateInscripcionDto){
+  crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto:CreateInscripcionDto[]){
     let dimensiones:string[]=["hacer","ser","decidir","saber"];
+    let data=[]
+    createInscripcionDto.forEach(inscripcion => {
+    
     for(let trimestre=1;trimestre<=3;trimestre++){
       dimensiones.forEach((dimension)=>{
-        this.create({
-          id_dicta:createInscripcionDto.id_dicta,
-          id_estudiante:createInscripcionDto.id_estudiante,
-          fecha:createInscripcionDto.fecha_inscripcion,
-          tipo:dimension,
-          trimestre:trimestre,
-          nota:0,
-          anio:new Date(createInscripcionDto.fecha_inscripcion).getFullYear()
-        });
+      let ins=
+      {
+            id_dicta:inscripcion.id_dicta,
+            id_estudiante:inscripcion.id_estudiante,
+            fecha:inscripcion.fecha_inscripcion,
+            tipo:dimension,
+            trimestre:trimestre,
+            nota:0,
+            anio:new Date(inscripcion.fecha_inscripcion).getFullYear()
+          }
+          data.push(ins)
       });
     }
+  });
+  this.notaRepository.save(data)
   }
 
   findOne(id: number) {
