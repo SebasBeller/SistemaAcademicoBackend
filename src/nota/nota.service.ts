@@ -21,6 +21,12 @@ export class NotaService {
     })
   }
 
+  async findAllYears() {
+    const notas = await this.notaRepository.find();
+    const anios = [...new Set(notas.map((nota) => nota.anio))];
+    return anios;
+  }
+
   crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto:CreateInscripcionDto[]){
     let dimensiones:string[]=["hacer","ser","decidir","saber"];
     let data=[]

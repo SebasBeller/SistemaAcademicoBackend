@@ -10,6 +10,7 @@ export class MateriaAsignadaProfesorService {
 
   }
   create(createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
+    console.log(createMateriaAsignadaProfesorDto)
     createMateriaAsignadaProfesorDto.anio=new Date(createMateriaAsignadaProfesorDto.fecha).getFullYear();
     const nuevaMateriaAsignada=this.materiaAsignadaProfesorRepository.create(createMateriaAsignadaProfesorDto);
     return this.materiaAsignadaProfesorRepository.save(nuevaMateriaAsignada);
@@ -77,6 +78,6 @@ export class MateriaAsignadaProfesorService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} materiaAsignadaProfesor`;
+    return this.materiaAsignadaProfesorRepository.delete(id);
   }
 }

@@ -17,6 +17,11 @@ export class NotaController {
     return this.notaService.findAll();
   }
 
+  @Get("years")
+  findAllYears() {
+    return this.notaService.findAllYears();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.notaService.findOne(+id);
