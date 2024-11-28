@@ -36,7 +36,8 @@ export class ProfesorService {
     return updatedProfesor;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} profesor`;
+  async remove(id: number): Promise<{ message: string }> {
+    const result = await this.profesorRepository.delete(id);
+    return { message: `Profesor con ID ${id} eliminado correctamente.` };
   }
 }

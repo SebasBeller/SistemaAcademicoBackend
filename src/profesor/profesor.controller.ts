@@ -34,7 +34,7 @@ export class ProfesorController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.profesorService.remove(+id);
   }
 }
