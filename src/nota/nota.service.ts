@@ -51,6 +51,18 @@ export class NotaService {
   this.notaRepository.save(data)
   }
 
+  eliminarNotasDeMateriaAsignada(id_dicta:number,id_estudiante:number,anio:number){
+    this.findAll().then((resp)=>{
+      let notas=resp.filter((nota)=>nota.id_dicta==id_dicta&&nota.id_estudiante==id_estudiante&&nota.anio==anio)
+      this.notaRepository.remove(notas);
+      // notas.forEach((nota)=>{
+      //   console.log(nota)
+
+      // })
+    });
+
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} nota`;
   }

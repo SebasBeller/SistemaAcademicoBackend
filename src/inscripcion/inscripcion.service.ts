@@ -32,6 +32,7 @@ createAll(createInscripcionDto: CreateInscripcionDto[]) {
     return inscripciones.map((inscripcion) => inscripcion.materiaAsignada);
   }
 
+
   async findEstudiantesInscritos(id:number) {
     const inscripciones = await this.inscripcionRepository.find({
       relations: ['estudiante'],
@@ -39,6 +40,15 @@ createAll(createInscripcionDto: CreateInscripcionDto[]) {
     });
     return inscripciones.map((inscripcion)=>inscripcion.estudiante)
   }
+
+  async findInscripcionesMateria(id:number) {
+    const inscripciones = await this.inscripcionRepository.find({
+      relations: ['estudiante'],
+      where: { id_dicta: id },
+    });
+    return inscripciones
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} inscripcion`;
   }
@@ -48,6 +58,8 @@ createAll(createInscripcionDto: CreateInscripcionDto[]) {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} inscripcion`;
+    let resp=this.inscripcionRepository.delete(id);
+    // console.log(resp)
+    return resp;
   }
 }

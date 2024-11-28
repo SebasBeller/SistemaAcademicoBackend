@@ -40,6 +40,12 @@ export class InscripcionController {
     return this.inscripcionService.findEstudiantesInscritos(+id);
   }
 
+  @Get('inscripciones/estudiantes/:id')
+  findAllInscripcionesDeMateria(@Param('id') id: string) {
+    return this.inscripcionService.findInscripcionesMateria(+id);
+  }
+
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.inscripcionService.findOne(+id);
@@ -51,7 +57,12 @@ export class InscripcionController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.inscripcionService.remove(+id);
+  async remove(@Param('id') id: string) {
+    let data =(await this.findAll()).find((ins)=>ins.id_inscripcion==+id);
+    this.notasService.eliminarNotasDeMateriaAsignada(data.id_dicta,data.id_estudiante,data.anio);
+    const resp = await this.inscripcionService.remove(+id);
+
+
+    return resp;
   }
 }
