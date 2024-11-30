@@ -11,6 +11,7 @@ async function bootstrap() {
     'http://35.164.95.156',
     'http://44.230.95.183',
     'http://44.229.200.200',
+    'https://academicofront.onrender.com/',
     'http://localhost:4200' // Puedes dejar esto para pruebas locales
   ];
 
