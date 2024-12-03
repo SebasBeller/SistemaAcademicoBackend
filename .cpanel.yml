@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export NODE_ENV=production
+    - /usr/local/bin/npm install
+    - /usr/local/bin/npm run start:dev
