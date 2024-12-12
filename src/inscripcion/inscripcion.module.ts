@@ -9,5 +9,6 @@ import {AsistenciaModule} from '../asistencia/asistencia.module'
   imports:[TypeOrmModule.forFeature([Inscripcion]),NotaModule,AsistenciaModule],
   controllers: [InscripcionController],
   providers: [InscripcionService],
+  exports:[InscripcionService]
 })
 export class InscripcionModule {}

@@ -2,12 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EstudianteService } from './estudiante.service';
 import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
+import {Auth} from '../auth/auth.decorators';
 
+@Auth(['admin','profesor','estudiante'])
 @Controller('estudiante')
 export class EstudianteController {
   constructor(private readonly estudianteService: EstudianteService) {}
 
   @Post()
+  @Auth(['admin'])
   create(@Body() createEstudianteDto: CreateEstudianteDto) {
     return this.estudianteService.create(createEstudianteDto);
   }
@@ -23,11 +26,13 @@ export class EstudianteController {
   }
 
   @Patch(':id')
+  @Auth(['admin'])
   update(@Param('id') id: string, @Body() updateEstudianteDto: UpdateEstudianteDto) {
     return this.estudianteService.update(+id, updateEstudianteDto);
   }
 
   @Delete(':id')
+  @Auth(['admin'])
   remove(@Param('id') id: string) {
     return this.estudianteService.remove(+id);
   }

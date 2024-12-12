@@ -6,7 +6,8 @@ import {NotaService} from '../nota/nota.service'
 import {AsistenciaService} from '../asistencia/asistencia.service'
 import {CreateAsistenciaDto} from '../asistencia/dto/create-asistencia.dto'
 import type { Asistencia } from 'src/asistencia/entities/asistencia.entity';
-
+import {Auth} from '../auth/auth.decorators';
+@Auth(['admin','profesor','estudiante'])
 
 
 @Controller('inscripcion')
@@ -17,8 +18,8 @@ export class InscripcionController {
   ) {}
 
   @Post()
+  @Auth(['admin','profesor'])
   create(@Body() createInscripcionDto: CreateInscripcionDto[]) {
-    console.log(createInscripcionDto)
     this.notasService.crearNotasPorDefectoDeEstudianteInscrito(createInscripcionDto);
     this.asistenciaService.createAsistenciasPorDefecto(createInscripcionDto);
     return this.inscripcionService.createAll(createInscripcionDto);
@@ -52,14 +53,17 @@ export class InscripcionController {
   }
 
   @Patch(':id')
+  @Auth(['admin'])
   update(@Param('id') id: string, @Body() updateInscripcionDto: UpdateInscripcionDto) {
     return this.inscripcionService.update(+id, updateInscripcionDto);
   }
 
   @Delete(':id')
+  @Auth(['admin'])
   async remove(@Param('id') id: string) {
     let data =(await this.findAll()).find((ins)=>ins.id_inscripcion==+id);
-    this.notasService.eliminarNotasDeMateriaAsignada(data.id_dicta,data.id_estudiante,data.anio);
+    await this.notasService.eliminarNotasDeMateriaAsignada(data.id_dicta,data.id_estudiante,data.anio);
+    await this.asistenciaService.eliminarAsistenciasMatAsignadaDeEstudiante(data.id_dicta,data.id_estudiante,data.anio)
     const resp = await this.inscripcionService.remove(+id);
 
 

@@ -15,8 +15,8 @@ export class Profesor {
     @Column()
     email:string;
 
-    @Column()
-    password:string;
+    // @Column()
+    // password:string;
 
     @OneToMany(()=>MateriaAsignadaProfesor,(materiaAsignadaProfesor)=>materiaAsignadaProfesor.profesor)
     @JoinColumn({ name: 'id_profesor' })

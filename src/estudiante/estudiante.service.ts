@@ -3,15 +3,18 @@ import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
 import { Repository } from 'typeorm';
 import{Estudiante} from './entities/estudiante.entity'
+import{EstudianteCreate} from './entities/estudianteCreate.entity'
+
 import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class EstudianteService {
-  constructor(@InjectRepository(Estudiante) private readonly usuarioRepository: Repository<Estudiante>){
+  constructor(@InjectRepository(Estudiante) private readonly usuarioRepository: Repository<Estudiante>,
+  @InjectRepository(EstudianteCreate) private readonly usuarioRepositoryCreate: Repository<EstudianteCreate>,
+){
 
   }
   create(createEstudianteDto: CreateEstudianteDto) {
-    console.log(createEstudianteDto)
-    return this.usuarioRepository.save(createEstudianteDto);
+    return this.usuarioRepositoryCreate.save(createEstudianteDto);
   }
 
   findAll() {
@@ -24,6 +27,11 @@ export class EstudianteService {
   findOneByEmail(email: string) {
     return this.usuarioRepository.findOne({ where: { email } });
   }
+
+  findOneByEmailWithPass(email: string) {
+    return this.usuarioRepositoryCreate.findOne({ where: { email} });
+  }
+  
   
   findOne(id: number) {
     return this.usuarioRepository.findOne({
@@ -33,7 +41,8 @@ export class EstudianteService {
   }
 
  update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
-  return this.usuarioRepository.update(id,updateEstudianteDto);
+  // console.log()
+  return this.usuarioRepositoryCreate.update(id,updateEstudianteDto);
 }
 
   remove(id: number) {

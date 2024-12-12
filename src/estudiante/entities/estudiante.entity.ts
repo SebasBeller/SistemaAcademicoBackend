@@ -17,8 +17,8 @@ export class Estudiante {
     @Column()
     email:string;
 
-    @Column()
-    password:string;
+    // @Column()
+    // password:string;
     
     @Column()
     foto:string;

@@ -36,6 +36,7 @@ export class UnidadService {
     });
   }
   update(id: number, updateUnidadDto: UpdateUnidadDto) {
+    console.log(updateUnidadDto)
     return this.unidadRepository.update(id,updateUnidadDto);
   }
 

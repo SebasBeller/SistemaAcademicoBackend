@@ -1,8 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Elimina propiedades no definidas en el DTO
+      forbidNonWhitelisted: true, // Lanza error si se incluyen propiedades no esperadas
+      stopAtFirstError: true, // Detiene la validación en el primer error encontrado
+    }),
+  );
 
   const allowedOrigins = [
     'http://44.226.145.213',
@@ -26,6 +35,8 @@ async function bootstrap() {
     methods: 'GET,POST,PUT,DELETE,PATCH', // Métodos HTTP permitidos
     credentials: true // Si necesitas cookies o cabeceras autorizadas
   });
+
+
 
   await app.listen(3000);
 }

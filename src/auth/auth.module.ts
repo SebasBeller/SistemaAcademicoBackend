@@ -6,6 +6,8 @@ import { JwtStrategy } from './jwt.strategy';
 import {EstudianteModule} from '../estudiante/estudiante.module'
 import {ProfesorModule} from '../profesor/profesor.module'
 import {AuthController} from './auth.controller'
+import { JwtService } from '@nestjs/jwt';
+import {LoginAttemptsService} from './login-attemps.service'
 
 @Module({
   imports: [
@@ -13,9 +15,10 @@ import {AuthController} from './auth.controller'
     JwtModule.register({
       secret: 'secreto', 
       signOptions: { expiresIn: '60m' }, 
+      global:true
     }), EstudianteModule,ProfesorModule
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, LoginAttemptsService],
   exports: [AuthService],
   controllers:[AuthController]
 })

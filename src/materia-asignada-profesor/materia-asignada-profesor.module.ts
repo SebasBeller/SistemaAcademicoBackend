@@ -4,8 +4,18 @@ import { MateriaAsignadaProfesorController } from './materia-asignada-profesor.c
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MateriasModule } from 'src/materias/materias.module';
 import {MateriaAsignadaProfesor} from "./entities/materia-asignada-profesor.entity"
+import {InscripcionModule} from "../inscripcion/inscripcion.module"
+import {AsistenciaModule} from "../asistencia/asistencia.module"
+import {NotaModule} from "../nota/nota.module"
+
+
 @Module({
-  imports:[TypeOrmModule.forFeature([MateriaAsignadaProfesor]),MateriasModule],
+  imports:[TypeOrmModule.forFeature([MateriaAsignadaProfesor]),
+  MateriasModule,
+  InscripcionModule,
+  AsistenciaModule,
+  NotaModule
+],
   controllers: [MateriaAsignadaProfesorController],
   providers: [MateriaAsignadaProfesorService],
 })

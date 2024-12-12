@@ -41,7 +41,7 @@ export class NotaService {
             fecha:inscripcion.fecha_inscripcion,
             tipo:dimension,
             trimestre:trimestre,
-            nota:0,
+            nota:30,
             anio:new Date(inscripcion.fecha_inscripcion).getFullYear()
           }
           data.push(ins)
@@ -55,10 +55,6 @@ export class NotaService {
     this.findAll().then((resp)=>{
       let notas=resp.filter((nota)=>nota.id_dicta==id_dicta&&nota.id_estudiante==id_estudiante&&nota.anio==anio)
       this.notaRepository.remove(notas);
-      // notas.forEach((nota)=>{
-      //   console.log(nota)
-
-      // })
     });
 
   }
@@ -74,4 +70,5 @@ export class NotaService {
   remove(id: number) {
     return `This action removes a #${id} nota`;
   }
+
 }

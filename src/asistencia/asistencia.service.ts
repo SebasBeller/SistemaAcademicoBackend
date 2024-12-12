@@ -72,4 +72,12 @@ export class AsistenciaService {
   remove(id: number) {
     return this.asistenciaRepository.delete(id)
   }
+
+    
+  async eliminarAsistenciasMatAsignadaDeEstudiante(id_dicta: number,id_estudiante:number,anio:number
+  ) {
+    let data=(await this.findAll()).filter((asistencia)=>asistencia.id_dicta==id_dicta&&asistencia.id_estudiante==id_estudiante&& new Date(asistencia.fecha_asistencia).getFullYear()===anio);
+    // console.log(data)
+    return await this.asistenciaRepository.remove(data);
+  }
 }

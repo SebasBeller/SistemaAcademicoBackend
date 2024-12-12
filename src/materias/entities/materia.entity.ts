@@ -7,6 +7,9 @@ export class Materia {
     id_materia:number
     @Column()
     nombre:string
+
+    @Column()
+    id_paralelo:number;
    
     @ManyToOne(() => Paralelo,(paralelo)=>paralelo.materias)
     @JoinColumn({ name: 'id_paralelo' })

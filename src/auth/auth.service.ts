@@ -3,6 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { EstudianteService } from '../estudiante/estudiante.service';
 import { ProfesorService } from '../profesor/profesor.service';
+let EMAIL_ADMIN="admin123@gmail.com";
+let ADMIN="$2a$12$93GjQ1MxQlri6igw/.0rvOKCWHC9NtXmRkXlAMK4B3bws/r7Akzmy";
+
 
 @Injectable()
 export class AuthService {
@@ -11,32 +14,44 @@ export class AuthService {
     private readonly estudianteService: EstudianteService,
     private readonly profesorService: ProfesorService
   ) {}
-
   async validateUser(email: string, password: string): Promise<any> {
-    let user:any = await this.profesorService.findOneByEmail(email) 
-    let tipo:string="profesor";
-    if(!user){
-      tipo="estudiante";
-      user=await this.estudianteService.findOneByEmail(email)
+    let tipo = "";
+    let id=-1;
+    let user=null;
+    user=await this.profesorService.findOneByEmailWithPass(email) 
+    ||await this.estudianteService.findOneByEmailWithPass(email)
+    ||{"email":EMAIL_ADMIN,"password":ADMIN};
+    if(user.id_profesor){
+      tipo="profesor"
+      id=user.id_profesor;
     }
-    if (email=="admin123" && password=="admin123"){
-      const salt = await bcrypt.genSalt();
-      password = await bcrypt.hash("admin", salt);
-      return {id_admin:0,email:email,password:password,tipo:"admin"}
+    else if(user.id_estudiante){
+      tipo="estudiante";
+      id=user.id_estudiante;
+    }
+    else {
+      tipo="admin";
+      id=0;
     }
 
-    if (user && await bcrypt.compare(password, user.password)) {
-      return {...user,tipo:tipo}; 
+    if (email==user.email.toLowerCase() && await bcrypt.compare(password,user.password)) {
+      return {id:id,...user,tipo:tipo};
     }
     return null;
   }
 
   async login(user: any) {
-    const payload = { username: user.email, id_usuario: user.id_estudiante|| user.id_profesor };
-    const {password,...usuario}=user
+    const payload = {
+      username: user.email,
+      id_usuario: user.id,
+      tipo: user.tipo,
+    };
     return {
       access_token: this.jwtService.sign(payload),
-      usuario
+      usuario: payload,
     };
   }
-}
+  
+    
+  }
+// }

@@ -5,6 +5,9 @@ import {Material} from "../../material/entities/material.entity";
 export class Unidad {
   @PrimaryGeneratedColumn()
   id_unidad: number;
+  
+  @Column({nullable:false})
+  id_dicta?: number
 
   @Column()
   nombre: string;
@@ -14,9 +17,6 @@ export class Unidad {
 
   @Column()
   imagen_url: string;
-
-  @Column({nullable:true})
-  id_dicta?: number
 
   @ManyToOne(() => MateriaAsignadaProfesor, (materia) => materia.unidades)
   @JoinColumn({ name: 'id_dicta' })

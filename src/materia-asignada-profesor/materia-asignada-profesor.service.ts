@@ -4,13 +4,16 @@ import { UpdateMateriaAsignadaProfesorDto } from './dto/update-materia-asignada-
 import { InjectRepository } from '@nestjs/typeorm';
 import { MateriaAsignadaProfesor } from './entities/materia-asignada-profesor.entity';
 import { Repository } from 'typeorm';
+
+
 @Injectable()
 export class MateriaAsignadaProfesorService {
-  constructor(@InjectRepository(MateriaAsignadaProfesor) private readonly materiaAsignadaProfesorRepository: Repository<MateriaAsignadaProfesor>) {
+  constructor(@InjectRepository(MateriaAsignadaProfesor) private readonly materiaAsignadaProfesorRepository: Repository<MateriaAsignadaProfesor>,
+
+) {
 
   }
   create(createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
-    console.log(createMateriaAsignadaProfesorDto)
     createMateriaAsignadaProfesorDto.anio=new Date(createMateriaAsignadaProfesorDto.fecha).getFullYear();
     const nuevaMateriaAsignada=this.materiaAsignadaProfesorRepository.create(createMateriaAsignadaProfesorDto);
     return this.materiaAsignadaProfesorRepository.save(nuevaMateriaAsignada);
@@ -31,7 +34,6 @@ export class MateriaAsignadaProfesorService {
     );
   }
   async findAllTeacherSignatures(nombre: string) {
-    console.log("ENTE")
     return await this.materiaAsignadaProfesorRepository.find({
         relations: ['materia', 'materia.paralelo', 'profesor'],
         where: { profesor: { nombre: nombre } }
@@ -64,7 +66,6 @@ export class MateriaAsignadaProfesorService {
       relations: ['inscripciones.estudiante'],
     });
   
-    // Asegúrate de que existan inscripciones antes de intentar extraer estudiantes
     if (materiaAsignada && materiaAsignada.inscripciones) {
       return materiaAsignada.inscripciones.map(inscripcion => inscripcion.estudiante);
     }
@@ -78,6 +79,7 @@ export class MateriaAsignadaProfesorService {
   }
 
   remove(id: number) {
+
     return this.materiaAsignadaProfesorRepository.delete(id);
   }
 }

@@ -2,14 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MateriaAsignadaProfesorService } from './materia-asignada-profesor.service';
 import { CreateMateriaAsignadaProfesorDto } from './dto/create-materia-asignada-profesor.dto';
 import { UpdateMateriaAsignadaProfesorDto } from './dto/update-materia-asignada-profesor.dto';
-import{MateriasService} from '../materias/materias.service';
+import {Auth} from '../auth/auth.decorators';
+
+
+@Auth(['admin','profesor','estudiante'])
 @Controller('materia-asignada-profesor')
 export class MateriaAsignadaProfesorController {
   constructor(private readonly materiaAsignadaProfesorService: MateriaAsignadaProfesorService,
-    private materiaService:MateriasService
   ) {}
 
   @Post()
+  @Auth(['admin'])
   async create(@Body() createMateriaAsignadaProfesorDto: CreateMateriaAsignadaProfesorDto) {
     
     return await this.materiaAsignadaProfesorService.create(createMateriaAsignadaProfesorDto);
@@ -53,12 +56,14 @@ export class MateriaAsignadaProfesorController {
   }
 
   @Patch(':id')
+  @Auth(['admin'])
   update(@Param('id') id: string, @Body() updateMateriaAsignadaProfesorDto: UpdateMateriaAsignadaProfesorDto) {
     return this.materiaAsignadaProfesorService.update(+id, updateMateriaAsignadaProfesorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.materiaAsignadaProfesorService.remove(+id);
+  @Auth(['admin'])
+  async remove(@Param('id') id: string) {
+    return await this.materiaAsignadaProfesorService.remove(+id);
   }
 }

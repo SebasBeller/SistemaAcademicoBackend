@@ -2,12 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MaterialService } from './material.service';
 import { CreateMaterialDto } from './dto/create-material.dto';
 import { UpdateMaterialDto } from './dto/update-material.dto';
+import {Auth} from '../auth/auth.decorators';
 
+@Auth(['admin','profesor','estudiante'])
 @Controller('material')
 export class MaterialController {
   constructor(private readonly materialService: MaterialService) {}
 
   @Post()
+  @Auth(['profesor'])
   async create(@Body() createMaterialDto: CreateMaterialDto) {
     return await this.materialService.create(createMaterialDto);
   }
@@ -33,11 +36,13 @@ export class MaterialController {
   }
 
   @Patch(':id')
+  @Auth(['profesor'])
   update(@Param('id') id: string, @Body() updateMaterialDto: UpdateMaterialDto) {
     return this.materialService.update(+id, updateMaterialDto);
   }
 
   @Delete(':id')
+  @Auth(['profesor'])
   remove(@Param('id') id: string) {
     return this.materialService.remove(+id);
   }

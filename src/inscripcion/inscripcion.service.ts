@@ -62,4 +62,8 @@ createAll(createInscripcionDto: CreateInscripcionDto[]) {
     // console.log(resp)
     return resp;
   }
+
+  eliminarInscripcionesDeEstudianteMatAsignada(id_dicta: number,id_estudiante:number,anio:number) {
+    return this.inscripcionRepository.delete({ id_dicta: id_dicta,id_estudiante:id_estudiante,anio:anio });
+  }
 }
