@@ -20,13 +20,13 @@ import { APP_GUARD } from '@nestjs/core';
   imports: [MateriasModule
     ,TypeOrmModule.forRoot({
       type: 'mysql',
-      //host: '207.38.88.29',
-      host: 'localhost',
+      host: '207.38.88.29',
+      //host: 'localhost',
       port: 3306,
-      //username: 'sisw424',
-      username: 'root',
-      //password: 'Wama+Lilian#1185',
-      password: '5951561010',
+      username: 'sisw424',
+      //username: 'root',
+      password: 'Wama+Lilian#1185',
+      //password: '5951561010',
       database: 'sisw424_registroEstudiantes',
       
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
