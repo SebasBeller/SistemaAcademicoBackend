@@ -21,7 +21,8 @@ async function bootstrap() {
     'http://44.230.95.183',
     'http://44.229.200.200',
     'https://academicofront.onrender.com',
-    'http://localhost:4200' 
+    'http://localhost:4200',
+    'http://127.0.0.1:5500'
   ];
 
   app.enableCors({

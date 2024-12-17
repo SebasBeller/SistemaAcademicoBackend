@@ -17,7 +17,7 @@ import {
     @IsNotEmpty({ message: 'El nombre no puede estar vacío' })
     @IsString({ message: 'El nombre debe ser una cadena de texto' })
     @Length(5, 30, { message: 'El nombre del material debe tener entre 5 y 30 caracteres' })
-    @Matches(/^(?!\s*$)[a-zA-Z0-9\s]+$/, {
+    @Matches(/^(?!\s*$)[a-zA-Z0-9\sáéíóúüñÁÉÍÓÚÜÑ_-]+$/, {
      message: 'El nombre del material solo puede contener letras, números y espacios',
     })
     nombre: string;
