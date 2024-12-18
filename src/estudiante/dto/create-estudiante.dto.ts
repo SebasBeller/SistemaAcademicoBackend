@@ -35,7 +35,9 @@ export class CreateEstudianteDto {
   @Length(8, 15, {
     message: 'La contraseña debe tener entre 8 y 15 caracteres',
   })
+  
   @IsNotEmpty({ message: 'La contraseña es obligatoria.' })
+  @Matches(/\S/, { message: 'La contraseña no puede contener solo espacios.' })
   password!: string;
 
   @IsNotEmpty({ message: 'La foto es obligatoria.' })

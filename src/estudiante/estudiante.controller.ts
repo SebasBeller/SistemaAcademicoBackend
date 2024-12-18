@@ -26,7 +26,7 @@ export class EstudianteController {
   }
 
   @Patch(':id')
-  @Auth(['admin',"estudiante"])
+  @Auth(['admin','estudiante'])
   update(@Param('id') id: string, @Body() updateEstudianteDto: UpdateEstudianteDto) {
     return this.estudianteService.update(+id, updateEstudianteDto);
   }
