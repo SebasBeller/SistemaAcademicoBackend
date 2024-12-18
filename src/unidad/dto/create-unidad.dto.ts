@@ -6,7 +6,7 @@ export class CreateUnidadDto {
 
   @IsString({ message: 'El nombre de la unidad debe ser una cadena de texto' })
   @Length(3, 30, { message: 'El nombre de la unidad debe tener entre 3 y 30 caracteres' })
-  @Matches(/^(?!\s*$)[a-zA-Z0-9\s]+$/, {
+  @Matches(/^(?!\s*$)[a-zA-Z0-9\sáéíóúüñÁÉÍÓÚÜÑ_-]+$/, {
    message: 'El nombre de la unidad solo puede contener letras, números y espacios',
   })
   @IsNotEmpty({ message: 'El nombre no puede estar vacío' })
